@@ -1,0 +1,101 @@
+{%extends 'base_foot.html'%}
+{%block head%}{% endblock head %}
+{%block body%}
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到大学生二手交易市场!</div>
+			<div class="fr">
+				{%if request.session.user_name|default:'' != ''%}
+				<div class="login_btn fl">
+					欢迎您：<em>{{request.session.user_name}}</em>
+					<span>|</span>
+					<a href="/user/logout/">退出</a>
+				</div>
+				{%else%}
+				<div class="login_btn fl">
+					<a href="/user/login/">登录</a>
+					<span>|</span>
+					<a href="/user/register/">注册</a>
+				</div>
+				{%endif%}
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="/user/info/">用户中心</a>
+					<span>|</span>
+					<a href="/cart/">我的购物车</a>
+					<span>|</span>
+					<a href="/order/">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="/" class="logo fl"><img src="/static/images/logo.png"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>		
+	</div>
+
+	<div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="/user/info/">· 个人信息</a></li>
+				<li><a href="/order/">· 全部订单</a></li>
+				<li><a href="/user/site/" >· 收货地址</a></li>
+                <li><a href="/user/publish/" class="active">· 发布商品</a></li>
+			</ul>
+		</div>
+		<div class="right_content clearfix">
+				<h3 class="common_title2"></h3>
+            <form action='/user/publish/' method='post'>
+						{%csrf_token%}
+
+				<h3 class="common_title2">商品详情</h3>
+				<div class="site_con">
+                        <div class="form_group">
+							<label>商品名称：</label>
+							<input type="text" name="gtitle">
+						</div>
+                        <div class="form_group">
+							<label>商品种类：</label>
+							<select name="ttitle" class="from_typeinfo">
+                                <option value="volvo">----</option>
+                                <option value="1">手机</option>
+                                <option value="2">电脑</option>
+                                <option value="3">配件</option>
+                                <option value="4">电器</option>
+                                <option value="5">书籍</option>
+                                <option value="6">其他</option>
+                            </select>
+						</div>
+						<div class="form_group"  id="id_gpic">
+							<label>图片：</label>
+							<input type="file" name="gpic">
+						</div>
+						<div class="form_group form_group2">
+							<label>简介：</label>
+							<textarea class="site_area" name='gjianjie'></textarea>
+						</div>
+						<div class="form_group">
+							<label>数量：</label>
+							<input type="number" name="gkucun" id="gkucun" id="vIntegerField">
+						</div>
+						<div class="form_group">
+							<label>价格：</label>
+							<input type="text" name="gprice" >
+						</div>
+                        <div class="form_group">
+							<label>联系方式：</label>
+							<input type="text" name="uphone">
+						</div>
+
+						<input type="submit"  value="提交" class="info_submit">
+					</form>
+				</div>
+		</div>
+	</div>
+{%endblock body%}
